@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    margin:0;
+}
+
+body{
+    overflow:hidden;
+    font-family:"Quicksand",sans-serif;
+    color:#3d3040;
+
+    background:
+        radial-gradient(circle at 20% 20%,#ffd6e7 0%,transparent 35%),
+        radial-gradient(circle at 80% 80%,#d9d4ff 0%,transparent 35%),
+        linear-gradient(135deg,#fff0f6,#f2efff);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* ==================================================
+   ARKA PLAN KALPLERİ
+================================================== */
+
+.background-hearts{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:1;
+}
+
+.bg-heart{
+    position:absolute;
+    bottom:-80px;
+    color:rgba(255,85,135,.18);
+    font-size:30px;
+    animation:heartFloat linear infinite;
+}
+
+.bg-heart:nth-child(1){left:5%;font-size:25px;animation-duration:11s;animation-delay:0s;}
+.bg-heart:nth-child(2){left:15%;font-size:42px;animation-duration:14s;animation-delay:2s;}
+.bg-heart:nth-child(3){left:27%;font-size:23px;animation-duration:10s;animation-delay:5s;}
+.bg-heart:nth-child(4){left:40%;font-size:50px;animation-duration:15s;animation-delay:1s;}
+.bg-heart:nth-child(5){left:54%;font-size:28px;animation-duration:12s;animation-delay:4s;}
+.bg-heart:nth-child(6){left:67%;font-size:45px;animation-duration:16s;animation-delay:3s;}
+.bg-heart:nth-child(7){left:80%;font-size:25px;animation-duration:11s;animation-delay:6s;}
+.bg-heart:nth-child(8){left:92%;font-size:38px;animation-duration:14s;animation-delay:1s;}
+
+@keyframes heartFloat{
+    0%{
+        transform:translateY(0) rotate(-10deg) scale(.8);
+        opacity:0;
+    }
+
+    15%{
+        opacity:.8;
+    }
+
+    50%{
+        transform:translateY(-55vh) rotate(10deg) scale(1.15);
+    }
+
+    100%{
+        transform:translateY(-120vh) rotate(-15deg) scale(.85);
+        opacity:0;
+    }
+}
+
+/* ==================================================
+   ZARF EKRANI
+================================================== */
+
+.envelope-screen{
+    position:fixed;
+    inset:0;
+    z-index:500;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+        radial-gradient(circle at 50% 35%,#ffe0ec 0%,transparent 38%),
+        linear-gradient(135deg,#fff1f7,#eeeaff);
+
+    transition:
+        opacity .8s ease,
+        visibility .8s ease;
+}
+
+.envelope-screen.opened{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+/* zarf alanı */
+
+.envelope-wrap{
+    position:relative;
+    width:min(86vw,420px);
+    text-align:center;
+
+    animation:envelopeEntrance 1s ease;
+}
+
+@keyframes envelopeEntrance{
+    from{
+        opacity:0;
+        transform:translateY(35px) scale(.9);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.envelope-title{
+    font-family:"DM Serif Display",serif;
+    color:#503746;
+    font-size:clamp(30px,7vw,45px);
+    margin-bottom:30px;
+}
+
+.envelope{
+    position:relative;
+    width:min(78vw,340px);
+    height:min(55vw,230px);
+    margin:auto;
+    cursor:pointer;
+
+    filter:drop-shadow(0 22px 35px rgba(120,60,100,.22));
+
+    transition:transform .35s ease;
+}
+
+.envelope:hover{
+    transform:translateY(-6px) scale(1.02);
+}
+
+.envelope-body{
+    position:absolute;
+    inset:0;
+
+    background:linear-gradient(145deg,#ff9fba,#ff6f91);
+
+    border-radius:8px;
+
+    overflow:hidden;
+}
+
+/* alt üçgen */
+
+.envelope-body:before{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+
+    width:0;
+    height:0;
+
+    border-left:50% solid transparent;
+    border-right:50% solid transparent;
+    border-bottom:0;
+}
+
+/* çapraz kapak */
+
+.envelope-left,
+.envelope-right{
+    position:absolute;
+    bottom:0;
+    width:0;
+    height:0;
+    border-style:solid;
+}
+
+.envelope-left{
+    left:0;
+    border-width:115px 170px 0 0;
+    border-color:#ff7898 transparent transparent transparent;
+}
+
+.envelope-right{
+    right:0;
+    border-width:115px 0 0 170px;
+    border-color:#ff6288 transparent transparent transparent;
+}
+
+/* üst kapak */
+
+.envelope-flap{
+    position:absolute;
+    left:0;
+    top:0;
+
+    width:100%;
+    height:100%;
+
+    background:linear-gradient(145deg,#ffabc2,#ff7899);
+
+    clip-path:polygon(0 0,100% 0,50% 55%);
+
+    transform-origin:top center;
+
+    transition:
+        transform .9s cubic-bezier(.2,.8,.2,1),
+        z-index .1s;
+
+    z-index:5;
+}
+
+.envelope.open .envelope-flap{
+    transform:rotateX(180deg);
+    z-index:1;
+}
+
+/* mektup */
+
+.letter{
+    position:absolute;
+
+    left:10%;
+    bottom:8%;
+
+    width:80%;
+    height:82%;
+
+    background:#fffafc;
+
+    border-radius:8px;
+
+    box-shadow:0 8px 20px rgba(100,40,70,.15);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:#b04e70;
+    font-size:45px;
+
+    z-index:2;
+
+    transition:
+        transform .9s cubic-bezier(.2,.8,.2,1);
+}
+
+.envelope.open .letter{
+    transform:translateY(-55%);
+}
+
+.envelope-heart{
+    position:absolute;
+    left:50%;
+    top:48%;
+    transform:translate(-50%,-50%);
+
+    font-size:48px;
+    z-index:8;
+
+    filter:drop-shadow(0 5px 8px rgba(180,50,90,.2));
+
+    transition:opacity .4s ease;
+}
+
+.envelope.open .envelope-heart{
+    opacity:0;
+}
+
+.open-text{
+    margin-top:28px;
+    color:#9c7182;
+    font-size:15px;
+    letter-spacing:2px;
+    animation:pulseText 2s ease-in-out infinite;
+}
+
+@keyframes pulseText{
+    0%,100%{opacity:.55;}
+    50%{opacity:1;}
+}
+
+/* ==================================================
+   ANA KART
+================================================== */
+
+.card{
+    position:relative;
+    z-index:20;
+
+    width:min(90%,600px);
+    min-height:390px;
+
+    padding:55px 40px;
+
+    text-align:center;
+
+    background:rgba(255,255,255,.72);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.8);
+
+    border-radius:35px;
+
+    box-shadow:
+        0 25px 70px rgba(120,80,120,.15);
+
+    animation:cardIn .8s ease;
+
+    transition:
+        opacity .5s ease,
+        transform .5s ease;
+}
+
+.card.hidden{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transform:translateY(30px) scale(.95);
+}
+
+@keyframes cardIn{
+    from{
+        opacity:0;
+        transform:translateY(30px) scale(.95);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.small{
+    font-size:14px;
+    letter-spacing:3px;
+    color:#b06a86;
+    margin-bottom:15px;
+    text-transform:uppercase;
+}
+
+h1{
+    font-family:"DM Serif Display",serif;
+    font-size:clamp(38px,7vw,58px);
+    font-weight:400;
+    line-height:1.1;
+    margin:10px 0 20px;
+    color:#503746;
+}
+
+.question{
+    font-size:20px;
+    color:#765b6a;
+    margin-bottom:35px;
+    line-height:1.6;
+}
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+    min-height:80px;
+    position:relative;
+    width:100%;
+}
+
+button{
+    border:none;
+    padding:15px 30px;
+    border-radius:50px;
+    font-family:"Quicksand",sans-serif;
+    font-size:17px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+/* ==================================================
+   EVET
+================================================== */
+
+.yes{
+    background:linear-gradient(135deg,#ff6f91,#ff4f78);
+    color:white;
+
+    box-shadow:
+        0 10px 25px rgba(255,79,120,.25);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.yes:hover{
+    transform:scale(1.08);
+
+    box-shadow:
+        0 15px 30px rgba(255,79,120,.35);
+}
+
+/* ==================================================
+   HAYIR
+================================================== */
+
+.no{
+    background:#eee7ed;
+    color:#755e6d;
+
+    position:relative;
+    z-index:20;
+
+    flex-shrink:0;
+
+    opacity:1;
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease,
+        background .25s ease;
+}
+
+.no:hover{
+    background:#e7dce3;
+}
+
+.no.hide{
+    opacity:0;
+    transform:scale(.92);
+    pointer-events:none;
+}
+
+/* ==================================================
+   UYARI
+================================================== */
+
+.overlay{
+    position:fixed;
+    inset:0;
+
+    background:rgba(15,10,20,.68);
+
+    backdrop-filter:blur(3px);
+    -webkit-backdrop-filter:blur(3px);
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:
+        opacity .4s ease,
+        visibility .4s ease;
+
+    z-index:90;
+}
+
+.overlay.show{
+    opacity:1;
+    visibility:visible;
+}
+
+.game-message{
+    position:fixed;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-45%)
+        scale(.94);
+
+    width:min(90%,550px);
+    min-height:220px;
+
+    padding:45px 35px 35px;
+
+    background:rgba(45,30,50,.97);
+
+    border:2px solid rgba(255,255,255,.15);
+
+    border-radius:22px;
+
+    color:white;
+    text-align:center;
+
+    opacity:0;
+    visibility:hidden;
+
+    z-index:100;
+
+    box-shadow:0 25px 80px rgba(0,0,0,.45);
+
+    transition:
+        opacity .45s ease,
+        transform .45s ease,
+        visibility .45s ease;
+}
+
+.game-message.show{
+    opacity:1;
+    visibility:visible;
+
+    transform:
+        translate(-50%,-50%)
+        scale(1);
+}
+
+.close-message{
+    position:absolute;
+    top:12px;
+    right:12px;
+
+    width:38px;
+    height:38px;
+
+    padding:0;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.1);
+
+    color:white;
+    font-size:23px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.close-message:hover{
+    background:rgba(255,255,255,.2);
+    transform:rotate(90deg);
+}
+
+.message-title{
+    margin:5px 0 20px;
+
+    font-family:"DM Serif Display",serif;
+
+    font-size:34px;
+    font-weight:400;
+
+    color:#ffd6e7;
+}
+
+.message-text{
+    font-size:17px;
+    line-height:1.7;
+    color:#f5eaf2;
+}
+
+/* ==================================================
+   FİNAL EFEKTLERİ
+================================================== */
+
+#celebration{
+    position:fixed;
+    inset:0;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+    z-index:300;
+}
+
+.burst-heart,
+.star,
+.rain-heart{
+    position:absolute;
+    pointer-events:none;
+    user-select:none;
+}
+
+.burst-heart{
+    left:50%;
+    top:50%;
+
+    font-size:30px;
+
+    animation:
+        burst 1.8s cubic-bezier(.15,.75,.2,1) forwards;
+}
+
+@keyframes burst{
+    0%{
+        transform:
+            translate(-50%,-50%)
+            scale(.2)
+            rotate(0deg);
+
+        opacity:1;
+    }
+
+    70%{
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            translate(
+                calc(-50% + var(--x)),
+                calc(-50% + var(--y))
+            )
+            scale(var(--scale))
+            rotate(var(--rotate));
+
+        opacity:0;
+    }
+}
+
+.star{
+    font-size:22px;
+
+    animation:
+        starMove 2.2s ease-out forwards;
+}
+
+@keyframes starMove{
+    0%{
+        transform:translateY(30px) scale(.2) rotate(0deg);
+        opacity:0;
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            translate(
+                var(--x),
+                var(--y)
+            )
+            scale(1.3)
+            rotate(180deg);
+
+        opacity:0;
+    }
+}
+
+.rain-heart{
+    top:-60px;
+
+    font-size:25px;
+
+    animation:
+        rain 5s linear forwards;
+}
+
+@keyframes rain{
+    0%{
+        transform:translateY(0) rotate(0deg);
+        opacity:0;
+    }
+
+    10%{
+        opacity:.9;
+    }
+
+    100%{
+        transform:
+            translateY(115vh)
+            rotate(360deg);
+
+        opacity:0;
+    }
+}
+
+/* büyük merkez kalbi */
+
+.big-final-heart{
+    position:fixed;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%)
+        scale(.1);
+
+    font-size:130px;
+
+    z-index:350;
+
+    pointer-events:none;
+
+    animation:
+        bigHeart 2s ease forwards;
+}
+
+@keyframes bigHeart{
+    0%{
+        opacity:0;
+        transform:
+            translate(-50%,-50%)
+            scale(.1);
+    }
+
+    25%{
+        opacity:1;
+    }
+
+    60%{
+        opacity:1;
+        transform:
+            translate(-50%,-50%)
+            scale(1.15);
+    }
+
+    100%{
+        opacity:0;
+        transform:
+            translate(-50%,-50%)
+            scale(1.7);
+    }
+}
+
+/* ==================================================
+   FİNAL TAVŞANI
+================================================== */
+
+.final-bunny{
+    font-size:85px;
+    display:inline-block;
+
+    animation:
+        bunnyHappy .75s ease-in-out 4;
+}
+
+@keyframes bunnyHappy{
+    0%,100%{
+        transform:translateY(0) rotate(0deg);
+    }
+
+    50%{
+        transform:translateY(-18px) rotate(-5deg) scale(1.08);
+    }
+}
+
+/* ==================================================
+   MOBİL
+================================================== */
+
+@media(max-width:600px){
+
+    .card{
+        padding:45px 22px;
+        min-height:370px;
+    }
+
+    h1{
+        font-size:42px;
+    }
+
+    .question{
+        font-size:17px;
+    }
+
+    button{
+        padding:14px 23px;
+        font-size:16px;
+    }
+
+    .game-message{
+        width:88%;
+        min-height:200px;
+        padding:40px 25px 30px;
+    }
+
+    .message-title{
+        font-size:29px;
+    }
+
+    .message-text{
+        font-size:15px;
+    }
+
+    .final-bunny{
+        font-size:75px;
+    }
+
+    .envelope-title{
+        font-size:34px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ==================================================
+     ARKA PLAN
+================================================== -->
+
+<div class="background-hearts">
+    <span class="bg-heart">💗</span>
+    <span class="bg-heart">💗</span>
+    <span class="bg-heart">💕</span>
+    <span class="bg-heart">💗</span>
+    <span class="bg-heart">💕</span>
+    <span class="bg-heart">💗</span>
+    <span class="bg-heart">💞</span>
+    <span class="bg-heart">💗</span>
+</div>
+
+<!-- ==================================================
+     ZARF
+================================================== -->
+
+<div class="envelope-screen" id="envelopeScreen">
+
+    <div class="envelope-wrap">
+
+        <div class="envelope-title">
+            Aşkıma minik bir süpriz 💌
+        </div>
+
+        <div class="envelope" id="envelope">
+
+            <div class="envelope-body"></div>
+
+            <div class="letter">
+                💌
+            </div>
+
+            <div class="envelope-left"></div>
+            <div class="envelope-right"></div>
+
+            <div class="envelope-flap"></div>
+
+            <div class="envelope-heart">
+                💗
+            </div>
+
+        </div>
+
+        <div class="open-text">
+            Açmak için zarfa dokun 💌
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ==================================================
+     ANA KART
+================================================== -->
+
+<div class="card hidden" id="card">
+
+    <div class="small" id="small">
+        Nisosuma küçük bir soru
+    </div>
+
+    <h1 id="title">
+        Bana güveniyor musun?
+    </h1>
+
+    <div class="question" id="question">
+        Çok düşünme nisosummm
+    </div>
+
+    <div class="buttons">
+
+        <button class="yes" id="yesButton">
+            Evet 😘
+        </button>
+
+        <button class="no" id="noButton">
+            Hayır 😒
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ==================================================
+     KARARTMA
+================================================== -->
+
+<div class="overlay" id="overlay"></div>
+
+<!-- ==================================================
+     UYARI
+================================================== -->
+
+<div class="game-message" id="gameMessage">
+
+    <button class="close-message" id="closeMessage">
+        ×
+    </button>
+
+    <div class="message-title">
+        ASKIMMMMMMMMMMMM
+    </div>
+
+    <div class="message-text">
+        NE DEMEKKK HAYIRRRR AYIP BE
+        AGLICAM SENIN YUZUNDEN
+    </div>
+
+</div>
+
+<!-- ==================================================
+     KUTLAMA ALANI
+================================================== -->
+
+<div id="celebration"></div>
+
+<script>
+
+/* ==================================================
+   ELEMENTLER
+================================================== */
+
+const envelopeScreen =
+    document.getElementById("envelopeScreen");
+
+const envelope =
+    document.getElementById("envelope");
+
+const card =
+    document.getElementById("card");
+
+const small =
+    document.getElementById("small");
+
+const title =
+    document.getElementById("title");
+
+const question =
+    document.getElementById("question");
+
+const yesButton =
+    document.getElementById("yesButton");
+
+const noButton =
+    document.getElementById("noButton");
+
+const overlay =
+    document.getElementById("overlay");
+
+const gameMessage =
+    document.getElementById("gameMessage");
+
+const closeMessage =
+    document.getElementById("closeMessage");
+
+const celebration =
+    document.getElementById("celebration");
+
+/* ==================================================
+   DURUM
+================================================== */
+
+let envelopeOpened = false;
+let step = 0;
+let noClicked = false;
+
+/* ==================================================
+   ZARFI AÇ
+================================================== */
+
+envelope.addEventListener("click", openEnvelope);
+
+function openEnvelope(){
+
+    if(envelopeOpened){
+        return;
+    }
+
+    envelopeOpened = true;
+
+    envelope.classList.add("open");
+
+    /*
+        Önce zarfın açılmasını
+        izliyoruz.
+    */
+
+    setTimeout(function(){
+
+        envelopeScreen.classList.add("opened");
+
+    },900);
+
+    /*
+        Zarf ekranı tamamen
+        kaybolduktan sonra kartı getiriyoruz.
+    */
+
+    setTimeout(function(){
+
+        card.classList.remove("hidden");
+
+    },1250);
+}
+
+/* ==================================================
+   SORULAR
+================================================== */
+
+const questions = [
+
+    {
+        small:"İlk soru 👀",
+
+        title:"Bana güveniyor musun?",
+
+        text:"Sadece bir kerecik... Bana güven. ❤️",
+
+        hasNo:true
+    },
+
+    {
+        small:"Aferin Nisosum ❤️",
+
+        title:"Beni seviyor musun?",
+
+        text:"Sevdiğini biliyorum 😊",
+
+        hasNo:true
+    },
+
+    {
+        small:"Minik Tavşanım",
+
+        title:"Benim kız arkadaşım olur musun?",
+
+        text:"Başka seçenek yok gibi Nisosum ❤️",
+
+        hasNo:false
+    }
+
+];
+
+/* ==================================================
+   EVET
+================================================== */
+
+yesButton.addEventListener("click",function(){
+
+    step++;
+
+    if(step < questions.length){
+
+        changeQuestion();
+
+    }else{
+
+        showFinal();
+
+    }
+
+});
+
+/* ==================================================
+   SORU DEĞİŞTİR
+================================================== */
+
+function changeQuestion(){
+
+    const q = questions[step];
+
+    card.style.animation="none";
+
+    void card.offsetWidth;
+
+    card.style.animation="cardIn .7s ease";
+
+    small.textContent=q.small;
+
+    title.textContent=q.title;
+
+    question.textContent=q.text;
+
+    noClicked=false;
+
+    noButton.classList.remove("hide");
+
+    noButton.style.opacity="1";
+
+    noButton.style.transform="scale(1)";
+
+    noButton.style.pointerEvents="auto";
+
+    if(q.hasNo){
+
+        noButton.style.display="block";
+
+    }else{
+
+        noButton.style.display="none";
+
+    }
+
+}
+
+/* ==================================================
+   HAYIR
+================================================== */
+
+noButton.addEventListener("click",function(){
+
+    if(noClicked){
+        return;
+    }
+
+    noClicked=true;
+
+    noButton.classList.add("hide");
+
+    setTimeout(function(){
+
+        showWarning();
+
+    },450);
+
+});
+
+/* ==================================================
+   UYARI
+================================================== */
+
+function showWarning(){
+
+    overlay.classList.add("show");
+
+    gameMessage.classList.add("show");
+
+}
+
+function closeWarning(){
+
+    gameMessage.classList.remove("show");
+
+    overlay.classList.remove("show");
+
+    if(
+        questions[step] &&
+        questions[step].hasNo
+    ){
+
+        noClicked=false;
+
+        noButton.style.display="block";
+
+        noButton.classList.remove("hide");
+
+        noButton.style.opacity="1";
+
+        noButton.style.transform="scale(1)";
+
+        noButton.style.pointerEvents="auto";
+
+    }
+
+}
+
+closeMessage.addEventListener(
+    "click",
+    closeWarning
+);
+
+overlay.addEventListener(
+    "click",
+    closeWarning
+);
+
+/* ==================================================
+   FİNAL
+================================================== */
+
+function showFinal(){
+
+    /*
+        Kartı koruyoruz.
+        Sadece içeriğini değiştiriyoruz.
+    */
+
+    card.style.animation="none";
+
+    void card.offsetWidth;
+
+    card.style.animation="finalCardIn 1s cubic-bezier(.2,.8,.2,1)";
+
+    card.innerHTML=`
+
+        <div class="small">
+            Minik Meleğim benim ❤️
+        </div>
+
+        <div class="final-bunny">
+            🐰
+        </div>
+
+        <h1>
+            Oh be Aşkım artık tam olduk. ❤️
+        </h1>
+
+        <div class="question">
+
+            Seni Seviyorum
+
+            <br><br>
+
+            İyi ki varsın
+
+            <br><br>
+
+            Birlikte ve güzel günlere
+            birtanemmm 💗
+
+        </div>
+
+        <div style="
+            font-size:35px;
+            margin-top:20px;
+        ">
+            💕 💗 💕
+        </div>
+
+    `;
+
+    startCelebration();
+
+}
+
+/* ==================================================
+   FİNAL KART ANİMASYONU
+================================================== */
+
+const finalStyle=document.createElement("style");
+
+finalStyle.textContent=`
+
+@keyframes finalCardIn{
+
+    0%{
+        opacity:0;
+        transform:
+            translateY(80px)
+            scale(.88);
+    }
+
+    60%{
+        opacity:1;
+        transform:
+            translateY(-12px)
+            scale(1.03);
+    }
+
+    80%{
+        transform:
+            translateY(5px)
+            scale(.99);
+    }
+
+    100%{
+        opacity:1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+`;
+
+document.head.appendChild(finalStyle);
+
+/* ==================================================
+   KUTLAMA
+================================================== */
+
+function startCelebration(){
+
+    /*
+        İlk büyük kalp
+    */
+
+    const bigHeart =
+        document.createElement("div");
+
+    bigHeart.className="big-final-heart";
+
+    bigHeart.textContent="💗";
+
+    celebration.appendChild(bigHeart);
+
+    setTimeout(function(){
+
+        bigHeart.remove();
+
+    },2100);
+
+    /*
+        Yoğun kalp havai fişekleri
+    */
+
+    createBurst(45);
+    createBurst(45);
+    createBurst(55);
+
+    /*
+        Yıldızlar
+    */
+
+    setTimeout(function(){
+
+        createStars(35);
+
+    },350);
+
+    /*
+        Kalp yağmuru
+    */
+
+    setTimeout(function(){
+
+        createRain(55);
+
+    },1500);
+
+}
+
+/* ==================================================
+   KALP PATLAMASI
+================================================== */
+
+function createBurst(amount){
+
+    setTimeout(function(){
+
+        for(let i=0;i<amount;i++){
+
+            const heart =
+                document.createElement("div");
+
+            heart.className="burst-heart";
+
+            const hearts=[
+                "💗",
+                "💖",
+                "💕",
+                "❤️",
+                "💓",
+                "💞"
+            ];
+
+            heart.textContent=
+                hearts[
+                    Math.floor(
+                        Math.random()*hearts.length
+                    )
+                ];
+
+            const angle=
+                Math.random()*Math.PI*2;
+
+            const distance=
+                180+Math.random()*430;
+
+            const x=
+                Math.cos(angle)*distance;
+
+            const y=
+                Math.sin(angle)*distance;
+
+            heart.style.setProperty(
+                "--x",
+                x+"px"
+            );
+
+            heart.style.setProperty(
+                "--y",
+                y+"px"
+            );
+
+            heart.style.setProperty(
+                "--scale",
+                (.5+Math.random()*1.5).toFixed(2)
+            );
+
+            heart.style.setProperty(
+                "--rotate",
+                (-360+Math.random()*720)+"deg"
+            );
+
+            heart.style.fontSize=
+                (18+Math.random()*35)+"px";
+
+            celebration.appendChild(heart);
+
+            setTimeout(function(){
+
+                heart.remove();
+
+            },1900);
+
+        }
+
+    },Math.random()*350);
+
+}
+
+/* ==================================================
+   YILDIZLAR
+================================================== */
+
+function createStars(amount){
+
+    for(let i=0;i<amount;i++){
+
+        const star =
+            document.createElement("div");
+
+        star.className="star";
+
+        star.textContent=
+            Math.random()>.5
+                ? "✨"
+                : "⭐";
+
+        star.style.left=
+            Math.random()*100+"%";
+
+        star.style.top=
+            (20+Math.random()*60)+"%";
+
+        star.style.setProperty(
+            "--x",
+            (-100+Math.random()*200)+"px"
+        );
+
+        star.style.setProperty(
+            "--y",
+            (-150+Math.random()*300)+"px"
+        );
+
+        celebration.appendChild(star);
+
+        setTimeout(function(){
+
+            star.remove();
+
+        },2300);
+
+    }
+
+}
+
+/* ==================================================
+   KALP YAĞMURU
+================================================== */
+
+function createRain(amount){
+
+    for(let i=0;i<amount;i++){
+
+        setTimeout(function(){
+
+            const heart =
+                document.createElement("div");
+
+            heart.className="rain-heart";
+
+            const hearts=[
+                "💗",
+                "💕",
+                "💖",
+                "💞",
+                "❤️"
+            ];
+
+            heart.textContent=
+                hearts[
+                    Math.floor(
+                        Math.random()*hearts.length
+                    )
+                ];
+
+            heart.style.left=
+                Math.random()*100+"%";
+
+            heart.style.fontSize=
+                (18+Math.random()*25)+"px";
+
+            heart.style.animationDuration=
+                (4+Math.random()*3)+"s";
+
+            celebration.appendChild(heart);
+
+            setTimeout(function(){
+
+                heart.remove();
+
+            },7000);
+
+        },i*80);
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
